@@ -30,7 +30,7 @@ async def g(ctx, game: str):
 
         gameid = data[game]
 
-        playercounturl = (f'https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid={gameid}')
+        playercounturl = ('https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid={0}'.format(gameid))
         presp = requests.get(playercounturl)
         pcountdata = json.loads(presp.text)
 
@@ -41,7 +41,7 @@ async def g(ctx, game: str):
         except KeyError:
             playercount = pcountdata['response']['result']
 
-        await ctx.send(f"{game} has {playercount} players online.")
+        await ctx.send("{0} has {1} players online.".format(game, playercount))
     
     except KeyError:
         await ctx.send('You need to enter the exact name of the game.\nAnd if the name contains more than one word you need to contain them in "".\n\nFor example: ```"Grand Theft Auto 5"```')
