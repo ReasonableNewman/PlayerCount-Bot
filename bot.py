@@ -14,15 +14,12 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('--------------')
+    await bot.change_presence(activity=discord.Game(name='Try %help'))
 
 
-@bot.command(help='You need to enter the exact name of the game.\nAnd if the name contains more than one word you need to contain them in "".\n\nFor example: "Grand Theft Auto 5"')
+@bot.command(help='You need to enter the exact name of the game.\nAnd if the name contains more than one word you need to contain them in "".\n\nFor example: "DARK SOULS™ III"')
 async def g(ctx, game: str):
-    if game is None:
-        await ctx.send("No game passed")
-
     try:
-
         data_path = 'data/data.json'
 
         with open(data_path) as f:
@@ -37,7 +34,6 @@ async def g(ctx, game: str):
         try:
             playercount = pcountdata['response']['player_count']
             
-
         except KeyError:
             playercount = pcountdata['response']['result']
 
@@ -47,7 +43,9 @@ async def g(ctx, game: str):
         await ctx.send('You need to enter the exact name of the game.\nAnd if the name contains more than one word you need to contain them in "".\n\nFor example: ```"DARK SOULS™ III"```')
         
         
-        
+@g.error
+async def g_error(ctx, error):
+    await ctx.send("Error. Did you forget to enter a name?")      
 
     
 
