@@ -44,7 +44,7 @@ async def g(ctx, game: str):
         await ctx.send("{0} has {1} players online.".format(game, playercount))
     
     except KeyError:
-        await ctx.send('You need to enter the exact name of the game.\nAnd if the name contains more than one word you need to contain them in "".\n\nFor example: ```"Grand Theft Auto 5"```')
+        await ctx.send('You need to enter the exact name of the game.\nAnd if the name contains more than one word you need to contain them in "".\n\nFor example: ```"DARK SOULS™ III"```')
         
         
         
